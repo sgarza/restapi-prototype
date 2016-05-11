@@ -2,6 +2,6 @@ var routeMapper = new RouteMapper();;
 
 routeMapper
   .root('Home#index')
-  .get('/no-layout', {to : 'Home#noLayout'});
+  .get('/rest', { to: 'Home#rest' })
 
 module.exports = routeMapper;

@@ -1,5 +1,22 @@
-<p><i>HomeController.js:index() (/views/home/index.html)</i></p>
+<div style="background:#F0F0F0;padding:20px;">
+  <h2> RESTFul API Requests</h2>
 
-<% posts.forEach(function(post) { %>
-    <p>Post : <%= post %></p>
-<% }) %>
+  <ul>
+    <li><a href="/rest?order=-id">Order by id DESC</a></li>
+    <li><a href="/rest?order=-id">Order by id ASC</a></li>
+    <li><a href="/rest?order=-id&filters%5Bname%5D%5B%24ilike%5D=%2511%25">where name like '%11%'</a></li>
+    <li><a href="/rest?order=-id&filters%5Bname%5D%5B%24ilike%5D=%25user%25&page=2">where name like '%user%' and Page 2</a></li>
+  </ul>
+
+  <h3><strong>Snippets</strong></h3>
+
+  <p>Populate DB</p>
+  <script src="https://gist.github.com/sgarza/47d67ea0ec8f949c6482578ec79a9c52.js"></script>
+
+  <p>To turn an object to a URI encoded string</p>
+  <script src="https://gist.github.com/sgarza/ee3aff896909ff8bb01a965bca96e491.js"></script>
+
+  <p>Filter objects</p>
+  <script src="https://gist.github.com/sgarza/498e03f271a74690524bd2e05e8aad0f.js"></script>
+
+</div>

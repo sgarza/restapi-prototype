@@ -1,23 +1,38 @@
+var path = require('path');
+var RESTFulAPI = require(path.join(process.cwd(), 'lib', 'RESTFulAPI'));
+
 var HomeController = Class('HomeController').inherits(BaseController)({
   beforeActions : [
     {
-      before : ['_beforeIndex'],
-      actions : ['index']
+      before : function(req, res, next) {
+        var api = new RESTFulAPI({
+          req: req,
+          queryBuilder : User.query(),
+          pagination : {
+            perPage : 50
+          },
+          filters : {
+            allowedFields : ['name', 'id']
+          },
+          order : '-createdAt'
+        });
+
+        api.build().then(function(result) {
+          res.locals.result = result;
+          return next();
+        }).catch(next);
+      },
+      actions : ['rest']
     }
   ],
   prototype : {
-    _beforeIndex : function(req, res, next) {
-      logger.info('Before Index');
-      next();
-    },
-
     index : function(req, res, next) {
-      res.render('home/index.html', {layout : 'application', posts : ["1", "2", "3", "4", "5"]});
+      res.render('home/index.html')
     },
 
-    noLayout : function(req, res) {
-      res.render('home/index.html', {layout : false, posts : ["1", "2", "3", "4", "5"]});
-    },
+    rest : function(req, res, next) {
+      res.json(res.locals.result);
+    }
   }
 });
 
